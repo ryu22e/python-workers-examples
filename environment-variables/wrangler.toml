@@ -1,0 +1,7 @@
+name = "environment-variables"
+main = "src/entry.py"
+compatibility_flags = ["python_workers"]
+compatibility_date = "2024-03-29"
+
+[vars]
+MY_NAME = "Ryuji Tsutsui"
