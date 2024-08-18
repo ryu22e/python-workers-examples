@@ -1,4 +1,4 @@
-# built-in packageのサンプル
+# built-in packagesのサンプル
 ## ローカルでの実行方法
 以下のURLからOpenAIのAPIキーを取得する。
 
