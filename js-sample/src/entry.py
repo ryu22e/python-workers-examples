@@ -6,7 +6,7 @@ API_URL = "https://httpbin.org"
 
 async def on_fetch(request, env):
     # /old にアクセスされた場合は/にリダイレクト
-    # JavaScriptだとnew URL(request.url)と書くが、Pythonでnew演算子はないのでこう書く
+    # JavaScriptだとnew URL(request.url)と書くが、Pythonにnew演算子はないのでこう書く
     url = URL.new(request.url)
     if url.pathname == "/old":
         return Response.redirect(url.origin, 307)
