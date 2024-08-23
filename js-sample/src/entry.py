@@ -1,10 +1,14 @@
-from js import Headers, Response, fetch, console
+from js import Headers, Response, fetch, console, URL
 
 
 API_URL = "https://httpbin.org"
 
 
 async def on_fetch(request, env):
+    url = URL.new(request.url)
+    if url.pathname == "/old":
+        return Response.redirect(url.origin, 307)
+
     # JSON形式でレスポンスを返すためのヘッダーを設定
     headers = Headers.new({"content-type": "application/json; charset=utf-8"}.items())
 
