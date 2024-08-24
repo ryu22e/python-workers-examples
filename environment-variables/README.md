@@ -17,7 +17,7 @@ $ npx wrangler@latest dev
 `Enter a secret value:`と表示されるので、任意の値を入力する。
 
 ```bash
-$ npx wrangler secret put
+$ npx wrangler secret put SECRET_KEY
 ```
 
 以下のコマンドを実行する。
