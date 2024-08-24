@@ -29,6 +29,8 @@ class Season(Enum):
 
 @app.get("/")
 async def root(req: Request, word: str, season: Season):
+    """AIに俳句を詠ませる"""
+
     env = req.scope["env"]  # 環境変数を取得
     llm = OpenAI(api_key=env.API_KEY)
     prompt = PromptTemplate.from_template(
@@ -42,8 +44,11 @@ async def root(req: Request, word: str, season: Season):
 
 @app.get("/pycamp-events")
 async def pycamp_events(req: Request):
+    """Python Boot Campのイベント情報を取得する"""
+
     await micropip.install("beautifulsoup4==4.12.3")
 
+    # beautifulsoup4はbuilt-in packagesにはないがmicropipでインストールできる
     from bs4 import BeautifulSoup
 
     async with httpx.AsyncClient() as client:
@@ -68,3 +73,21 @@ async def pycamp_events(req: Request):
                 "events": events
             }
         )
+
+
+@app.get("/micropip-install-error")
+async def micropip_install_error(req: Request):
+    """micropip.install()が失敗する例"""
+
+    await micropip.install("pandas==2.2.2")
+
+    # pandas==2.2.2はwheel化されていないため、micropipでインストールできずエラーになる
+    import pandas as pd
+
+    data = [1, 2, 3, 4]
+    df = pd.DataFrame(data, columns=["number"])
+    return JSONResponse(
+        content={
+            "participants": df.to_dict(orient="records")
+        }
+    )
