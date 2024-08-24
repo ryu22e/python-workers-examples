@@ -9,7 +9,7 @@ SECRET_KEY="local_value"
 以下のコマンドを実行する。
 
 ```bash
-$ npx wrangler@latest dev
+% npx wrangler@latest dev
 ```
 
 ## デプロイ方法
@@ -17,11 +17,11 @@ $ npx wrangler@latest dev
 `Enter a secret value:`と表示されるので、任意の値を入力する。
 
 ```bash
-$ npx wrangler secret put SECRET_KEY
+% npx wrangler secret put SECRET_KEY
 ```
 
 以下のコマンドを実行する。
 
 ```bash
-$ npx wrangler@latest deploy
+% npx wrangler@latest deploy
 ```
