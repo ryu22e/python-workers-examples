@@ -14,8 +14,6 @@ PYCAMP_URL = "https://www.pycon.jp/support/bootcamp.html"
 async def on_fetch(request, env):
     import asgi
 
-    await micropip.install("beautifulsoup4")
-
     return await asgi.fetch(app, request, env)
 
 
@@ -44,6 +42,8 @@ async def root(req: Request, word: str, season: Season):
 
 @app.get("/pycamp-events")
 async def pycamp_events(req: Request):
+    await micropip.install("beautifulsoup4==4.12.3")
+
     from bs4 import BeautifulSoup
 
     async with httpx.AsyncClient() as client:
