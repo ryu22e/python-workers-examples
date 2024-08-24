@@ -79,9 +79,9 @@ async def pycamp_events(req: Request):
 async def micropip_install_error(req: Request):
     """micropip.install()が失敗する例"""
 
+    # pandas==2.2.2はwheel化されていないため、micropipでインストールできずエラーになる
     await micropip.install("pandas==2.2.2")
 
-    # pandas==2.2.2はwheel化されていないため、micropipでインストールできずエラーになる
     import pandas as pd
 
     data = [1, 2, 3, 4]
