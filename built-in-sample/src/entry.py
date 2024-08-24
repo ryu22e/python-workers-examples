@@ -79,7 +79,8 @@ async def pycamp_events(req: Request):
 async def micropip_install_error(req: Request):
     """micropip.install()が失敗する例"""
 
-    # pandas==2.2.2はwheel化されていないため、micropipでインストールできずエラーになる
+    # pandas==2.2.2はpure Pyhon wheelがないため、micropipでインストールできずエラーになる
+    # 参考: https://pyodide.org/en/stable/usage/faq.html#why-can-t-micropip-find-a-pure-python-wheel-for-a-package
     await micropip.install("pandas==2.2.2")
 
     import pandas as pd
