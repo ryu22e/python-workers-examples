@@ -14,8 +14,8 @@ async def on_fetch(request, env):
             # json()メソッドはリクエストボディがJSONでない場合に例外を発生させる仕様なので、ここで例外処理を行う
             return Response.new({"error": "Invalid JSON"}, status=400, headers=headers)
         # JSONリクエストボディからtitleとdescriptionを取得
-        title = getattr(data, "title")
-        description = getattr(data, "description")
+        title = getattr(data, "title", None)
+        description = getattr(data, "description", None)
         if not title or not description:
             # titleとdescriptionがない場合はエラーレスポンスを返す
             return Response.new(
