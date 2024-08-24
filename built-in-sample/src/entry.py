@@ -59,20 +59,13 @@ async def pycamp_events(req: Request):
         table = section.select_one("table") if section else None
         tbody = table.tbody if table else None
 
-        events = (
-            tr.find_all("td")[0].text
-            for tr in tbody.find_all("tr")
-        )
+        events = (tr.find_all("td")[0].text for tr in tbody.find_all("tr"))
         events = [
             event
             for event in events
             if event.startswith("Python Boot Camp in") and "中止" not in event
         ]
-        return JSONResponse(
-            content={
-                "events": events
-            }
-        )
+        return JSONResponse(content={"events": events})
 
 
 @app.get("/micropip-install-error")
@@ -87,8 +80,4 @@ async def micropip_install_error(req: Request):
 
     data = [1, 2, 3, 4]
     df = pd.DataFrame(data, columns=["number"])
-    return JSONResponse(
-        content={
-            "participants": df.to_dict(orient="records")
-        }
-    )
+    return JSONResponse(content={"participants": df.to_dict(orient="records")})

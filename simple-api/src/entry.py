@@ -1,6 +1,7 @@
 from js import Headers, Response
 from pyodide.ffi import JsException
 
+
 async def on_fetch(request, env):
     # JSON形式でレスポンスを返すためのヘッダーを設定
     headers = Headers.new({"content-type": "application/json; charset=utf-8"}.items())
@@ -23,9 +24,11 @@ async def on_fetch(request, env):
                 headers=headers,
             )
         # データベースに書籍情報を登録
-        await env.DB.prepare(
-            "INSERT INTO books (title, description) VALUES (?, ?)"
-        ).bind(title, description).run()
+        await (
+            env.DB.prepare("INSERT INTO books (title, description) VALUES (?, ?)")
+            .bind(title, description)
+            .run()
+        )
         return Response.new({"message": "ok"}, headers=headers)
     elif "GET" in request.method:
         # GETリクエストの場合
@@ -35,4 +38,6 @@ async def on_fetch(request, env):
     else:
         # POST, GET以外のリクエストの場合
         # POST, GET以外には非対応なので、405エラーを返す
-        return Response.new({"error": "Method not allowed"}, status=405, headers=headers)
+        return Response.new(
+            {"error": "Method not allowed"}, status=405, headers=headers
+        )
