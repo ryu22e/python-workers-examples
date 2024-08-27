@@ -31,7 +31,8 @@ class Season(Enum):
 async def root(req: Request, word: str, season: Season):
     """AIに俳句を詠ませる"""
 
-    env = req.scope["env"]  # 環境変数を取得
+    # 環境変数を取得する際はpydantic.BaseSettingsを使わず、この書き方にする。
+    env = req.scope["env"]
     llm = OpenAI(api_key=env.API_KEY)
     prompt = PromptTemplate.from_template(
         '"{word}"という単語を使って{season}の俳句を詠んでください。'
